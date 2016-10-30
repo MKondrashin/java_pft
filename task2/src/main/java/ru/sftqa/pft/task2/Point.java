@@ -1,4 +1,4 @@
-package main.java.ru.sftqa.pft.task2;
+package ru.sftqa.pft.task2;
 
 /**
  * Created by User on 22.10.2016.

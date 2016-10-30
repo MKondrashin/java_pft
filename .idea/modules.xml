@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
-      <module fileurl="file://$PROJECT_DIR$/task2/task2.iml" filepath="$PROJECT_DIR$/task2/task2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2.iml" filepath="$PROJECT_DIR$/.idea/modules/task2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/task2_main.iml" group="task2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/task2_test.iml" group="task2" />
     </modules>
   </component>
 </project>
