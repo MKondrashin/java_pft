@@ -15,7 +15,7 @@ public class ApplicationManager {
     private  NavigationHelper navigationHelper;
     FirefoxDriver wd;
     private  GroupHelper groupHelper;
-
+    private  ContactHelper contactHelper;
 
 
     public void init() {
@@ -25,6 +25,7 @@ public class ApplicationManager {
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
+        contactHelper = new ContactHelper(wd);
         wd.get("http://localhost/addressbook/group.php");
         sessionHelper.login("admin", "secret");
     }
@@ -44,5 +45,9 @@ public class ApplicationManager {
 
     public SessionHelper getSessionHelper() {
         return sessionHelper;
+    }
+
+    public ContactHelper getContactHelper() {
+        return contactHelper;
     }
 }

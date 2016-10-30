@@ -25,6 +25,8 @@ public class ContactData {
     private String addressHome;
     private String notes;
     private Date birthday;
+    private String home;
+
 
     public ContactData()
     {
@@ -50,6 +52,7 @@ public class ContactData {
         c.setHomepage("vk.com");
         c.setTitle("Sir");
         c.setPhoneWork("364842");
+        c.setHome("NO HOME");
 
         return c;
     }
@@ -183,5 +186,13 @@ public class ContactData {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
     }
 }
