@@ -35,39 +35,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("phone2"),c.getHome());
         type(By.name("notes"),c.getNotes());
 
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[1]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[1]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[5]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[5]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[1]//option[33]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).click();
-        }
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[1]")).click();
-        }
-
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[8]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[2]//option[8]")).click();
-        }
-
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']/form/select[5]//option[2]")).click();
-        }
-
+        //birthday and group
+        click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
+        click(By.xpath("//div[@id='content']/form/select[1]//option[5]"));
+        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+        click(By.xpath("//div[@id='content']/form/select[2]//option[1]"));
+        click(By.xpath("//div[@id='content']/form/select[2]//option[8]"));
+        click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
     }
 
 
