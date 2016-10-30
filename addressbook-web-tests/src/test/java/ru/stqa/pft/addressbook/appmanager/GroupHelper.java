@@ -34,13 +34,20 @@ public class GroupHelper extends HelperBase{
     }
 
     public void selectGroup() {
-        if (!wd.findElement(By.xpath("//div[@id='content']/form/span[1]/input")).isSelected()) {
-            click(By.xpath("//div[@id='content']/form/span[1]/input"));
-        }
+
+            click(By.name("selected[]"));
 
     }
 
     public void deleteSelectedGroups() {
         click(By.xpath("//div[@id='content']/form/input[5]"));
+    }
+
+    public void initGroupModification() {
+        click(By.xpath("//div[@id='content']/form/input[6]"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
     }
 }
