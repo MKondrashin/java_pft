@@ -15,9 +15,6 @@ public class ContactModificationTests extends TestBase {
     {
         app.getNavigationHelper().goToHomePage();
         app.getContactHelper().initContactModification();
-        ContactData c = ContactData.getRandomValidContactData();
-        c.setNickName("MODIFIED");
-        c.setHome("MODIFIED");
         app.getContactHelper().fillContactModification();
         app.getContactHelper().submitContractModification();
         app.getSessionHelper().logout();
