@@ -39,9 +39,6 @@ public class GroupCreationTests {
         wd.findElement(By.name("group_name")).click();
         wd.findElement(By.name("group_name")).clear();
         wd.findElement(By.name("group_name")).sendKeys("test1");
-        if (!wd.findElement(By.xpath("//div[@id='content']//select[normalize-space(.)='[none]']//option[1]")).isSelected()) {
-            wd.findElement(By.xpath("//div[@id='content']//select[normalize-space(.)='[none]']//option[1]")).click();
-        }
         wd.findElement(By.name("group_header")).click();
         wd.findElement(By.name("group_header")).sendKeys("\\9");
         wd.findElement(By.name("group_footer")).click();
