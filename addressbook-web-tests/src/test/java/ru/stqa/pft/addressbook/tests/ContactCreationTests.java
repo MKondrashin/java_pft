@@ -12,6 +12,7 @@ public class ContactCreationTests extends TestBase {
     public void ContactCreationTests() {
 
         app.getNavigationHelper().goToContactCreationPage();
+        app.getNavigationHelper().goToContactCreationPage();
         app.getContactHelper().fillContactForm(ContactData.getRandomValidContactData(), true);
         app.getContactHelper().submitContactCreation();
         app.getSessionHelper().logout();

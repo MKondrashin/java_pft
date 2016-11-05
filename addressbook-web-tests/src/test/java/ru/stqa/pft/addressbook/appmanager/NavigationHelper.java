@@ -25,6 +25,11 @@ public class NavigationHelper extends HelperBase{
     }
 
     public void goToContactCreationPage() {
+        if(isElementPresented(By.tagName("h1"))
+                && isElementPresented(By.xpath("//div[@id='content']//h1[.='Edit / add address book entry']"))
+                && isElementPresented(By.name("submit"))){
+                           return;
+        }
         click(By.linkText("add new"));
     }
 
