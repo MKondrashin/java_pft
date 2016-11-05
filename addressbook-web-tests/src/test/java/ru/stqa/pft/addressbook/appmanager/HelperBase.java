@@ -22,9 +22,16 @@ public class HelperBase {
     }
 
     protected void type(By locator, String text) {
-        WebElement element = wd.findElement(locator);
-        element.clear();
-        element.sendKeys(text);
+        click(locator);
+        if(text != null){
+            WebElement element = wd.findElement(locator);
+            String existingText = element.getAttribute("value");
+            if(!text.equals(existingText)) {
+                element.clear();
+                element.sendKeys(text);
+            }
+
+        }
     }
 
     protected void select(By locator, String visibleText)
