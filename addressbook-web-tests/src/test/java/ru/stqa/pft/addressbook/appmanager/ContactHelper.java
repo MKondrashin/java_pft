@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -16,41 +17,37 @@ public class ContactHelper extends HelperBase {
         super(wd);
     }
 
-    public void fillContactCreationForm(ContactData c)
-    {
-        click(By.name("theform"));
-        type(By.name("firstname"),c.getFirstName());
-        type(By.name("middlename"),c.getMiddleName());
-        type(By.name("lastname"),c.getLastName());
-        type(By.name("nickname"),c.getNickName());
-        type(By.name("title"),c.getTitle());
-        type(By.name("company"),c.getCompany());
-        type(By.name("address"),c.getAddressWork());
-        type(By.name("home"),c.getPhoneHome());
-        type(By.name("mobile"),c.getPhoneMobile());
-        type(By.name("work"),c.getPhoneWork());
-        type(By.name("fax"),c.getFax());
-        type(By.name("email"),c.getEmail());
-        click(By.name("theform"));
-        type(By.name("homepage"),c.getHomepage());
-        type(By.name("byear"),Integer.toString(c.getBirthday().getYear()));
-        type(By.name("address2"),c.getAddressHome());
-        type(By.name("phone2"),c.getHome());
-        type(By.name("notes"),c.getNotes());
+    public void fillContactForm(ContactData c, boolean creation) {
+        type(By.name("firstname"), c.getFirstName());
+        type(By.name("middlename"), c.getMiddleName());
+        type(By.name("lastname"), c.getLastName());
+        type(By.name("nickname"), c.getNickName());
+        type(By.name("title"), c.getTitle());
+        type(By.name("company"), c.getCompany());
+        type(By.name("address"), c.getAddressWork());
+        type(By.name("home"), c.getPhoneHome());
+        type(By.name("mobile"), c.getPhoneMobile());
+        type(By.name("work"), c.getPhoneWork());
+        type(By.name("fax"), c.getFax());
+        type(By.name("email"), c.getEmail());
+        type(By.name("homepage"), c.getHomepage());
+        type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
+        type(By.name("address2"), c.getAddressHome());
+        type(By.name("phone2"), c.getHome());
+        type(By.name("notes"), c.getNotes());
 
         //birthday and group
-        select(By.name("bday"),Integer.toString(c.getBirthday().getDay()));
-        select(By.name("bmonth"),getMonthForInt(c.getBirthday().getMonth()));
-        type(By.name("byear"),Integer.toString(c.getBirthday().getYear()));
-        select(By.name("new_group"), c.getGroup());
-//        click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
-//        click(By.xpath("//div[@id='content']/form/select[1]//option[5]"));
-//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-//        click(By.xpath("//div[@id='content']/form/select[2]//option[1]"));
-//        click(By.xpath("//div[@id='content']/form/select[2]//option[8]"));
-//        click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
+        select(By.name("bday"), Integer.toString(c.getBirthday().getDay()));
+        select(By.name("bmonth"), getMonthForInt(c.getBirthday().getMonth()));
+        type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
+        if (creation)
+        {
+            select(By.name("new_group"), c.getGroup());
+        }
+        else
+        {
+            Assert.assertFalse(isElementPresented(By.name("new_group")));
+        }
     }
 
     public void fillContactModification()

@@ -28,7 +28,7 @@ public class ApplicationManager {
 
     public void init() {
 
-        if(browser.equals(BrowserType.FIREFOX))         {
+        if(browser.equals(BrowserType.FIREFOX)){
             System.setProperty("webdriver.gecko.driver","C:\\Selenium\\Firefox driver\\geckodriver.exe");
             wd = new FirefoxDriver();
         } else if(browser.equals(BrowserType.CHROME)) {
@@ -40,7 +40,7 @@ public class ApplicationManager {
             wd = new InternetExplorerDriver();
         }
 
-        wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
