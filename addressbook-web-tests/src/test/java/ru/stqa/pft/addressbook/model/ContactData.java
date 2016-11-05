@@ -26,6 +26,7 @@ public class ContactData {
     private String notes;
     private Date birthday;
     private String home;
+    private String group;
 
 
     public ContactData()
@@ -53,7 +54,7 @@ public class ContactData {
         c.setTitle("Sir");
         c.setPhoneWork("364842");
         c.setHome("NO HOME");
-
+        c.setGroup("test1");
         return c;
     }
 
@@ -194,5 +195,13 @@ public class ContactData {
 
     public void setHome(String home) {
         this.home = home;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
     }
 }

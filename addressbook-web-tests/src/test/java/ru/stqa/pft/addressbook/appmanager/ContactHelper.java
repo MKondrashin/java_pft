@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
+import java.text.DateFormatSymbols;
+
 /**
  * Created by User on 31.10.2016.
  */
@@ -36,14 +38,18 @@ public class ContactHelper extends HelperBase {
         type(By.name("notes"),c.getNotes());
 
         //birthday and group
-        click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
-        click(By.xpath("//div[@id='content']/form/select[1]//option[5]"));
-        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
-        click(By.xpath("//div[@id='content']/form/select[2]//option[1]"));
-        click(By.xpath("//div[@id='content']/form/select[2]//option[8]"));
-        click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
+        select(By.name("bday"),Integer.toString(c.getBirthday().getDay()));
+        select(By.name("bmonth"),getMonthForInt(c.getBirthday().getMonth()));
+        type(By.name("byear"),Integer.toString(c.getBirthday().getYear()));
+        select(By.name("new_group"), c.getGroup());
+//        click(By.xpath("//div[@id='content']/form/select[1]//option[1]"));
+//        click(By.xpath("//div[@id='content']/form/select[1]//option[5]"));
+//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+//        click(By.xpath("//div[@id='content']/form/select[1]//option[33]"));
+//        click(By.xpath("//div[@id='content']/form/select[2]//option[1]"));
+//        click(By.xpath("//div[@id='content']/form/select[2]//option[8]"));
+//        click(By.xpath("//div[@id='content']/form/select[5]//option[2]"));
     }
 
     public void fillContactModification()
@@ -84,5 +90,9 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
+    private  String getMonthForInt(int month) {
+        String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return monthNames[month];
+    }
 
 }
