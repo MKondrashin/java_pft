@@ -14,6 +14,12 @@ public class ContactModificationTests extends TestBase {
     public void testContractModification()
     {
         app.getNavigationHelper().goToHomePage();
+        if(! app.getContactHelper().isThereAContact())
+        {
+            app.getNavigationHelper().goToContactCreationPage();
+            app.getContactHelper().createContract(ContactData.getRandomValidContactData());
+            app.getNavigationHelper().goToHomePage();
+        }
         app.getContactHelper().initContactModification();
         app.getContactHelper().fillContactForm(ContactData.getRandomValidContactData(), false);
         app.getContactHelper().submitContractModification();

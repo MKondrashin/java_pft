@@ -42,7 +42,15 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
         if (creation)
         {
-            select(By.name("new_group"), c.getGroup());
+            if(isElementPresented(By.xpath("//div[@id='content']/form/select[@name='new_group']/option[text()='" + c.getGroup() + "']")))
+            {
+                select(By.name("new_group"), c.getGroup());
+            }
+            else
+            {
+                select(By.name("new_group"), "[none]");
+            }
+
         }
         else
         {
@@ -92,5 +100,16 @@ public class ContactHelper extends HelperBase {
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return monthNames[month];
     }
+    
+    public void createContract(ContactData c)
+    {
+       fillContactForm(ContactData.getRandomValidContactData(), true);
+       submitContactCreation();
+    }
 
+
+    public boolean isThereAContact() {
+        return isElementPresented(By.name("entry"));
+
+    }
 }

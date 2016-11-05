@@ -54,7 +54,7 @@ public class ContactData {
         c.setTitle("Sir");
         c.setPhoneWork("364842");
         c.setHome("NO HOME");
-        c.setGroup("test1");
+        c.setGroup("test22");
         c.setNotes("Quae sunt Caesaris Caesari et quae sunt Dei Deo");
         return c;
     }
