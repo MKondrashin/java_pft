@@ -1,8 +1,11 @@
 package ru.stqa.pft.addressbook.model;
 
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by User on 31.10.2016.
@@ -37,25 +40,27 @@ public class ContactData {
     //TODO: actually randmoize contact creation
     public static ContactData getRandomValidContactData()
     {
+
+
         ContactData c = new ContactData();
-        c.setAddressHome("Penza");
-        c.setAddressWork("BRC");
+        c.setAddressHome( getRndStringWithTS());
+        c.setAddressWork(getRndStringWithTS());
         c.setBirthday(new Date());
-        c.setCompany("RENCREDIT");
+        c.setCompany(getRndStringWithTS());
         c.setEmail("NET@RENCREDIT.INVALID");
-        c.setFax("36485");
-        c.setFirstName("MAXIM");
-        c.setMiddleName("VIK");
-        c.setLastName("KONDRASHIN");
-        c.setNickName("THE GREATE");
-        c.setPhoneHome("311111");
-        c.setPhoneMobile("+79600000000");
+        c.setFax(getRndAlphaString());
+        c.setFirstName(getRndStringWithTS());
+        c.setMiddleName(getRndStringWithTS());
+        c.setLastName(getRndStringWithTS());
+        c.setNickName(getRndStringWithTS());
+        c.setPhoneHome(getRndAlphaString());
+        c.setPhoneMobile("+7" + getRndAlphaString());
         c.setHomepage("vk.com");
         c.setTitle("Sir");
-        c.setPhoneWork("364842");
-        c.setHome("NO HOME");
+        c.setPhoneWork(getRndAlphaString());
+        c.setHome(getRndStringWithTS());
         c.setGroup("test22");
-        c.setNotes("Quae sunt Caesaris Caesari et quae sunt Dei Deo");
+        c.setNotes(getRndStringWithTS());
         return c;
     }
 
@@ -205,4 +210,17 @@ public class ContactData {
     public void setGroup(String group) {
         this.group = group;
     }
+
+    private static String getRndStringWithTS()
+    {
+        return RandomStringUtils.randomAlphabetic(5) + Long.toString(System.currentTimeMillis());
+    }
+
+    private static String getRndAlphaString()
+    {
+        Random rnd = new Random();
+        return String.format("%010d",Math.abs(rnd.nextInt()) );
+    }
+
+
 }
