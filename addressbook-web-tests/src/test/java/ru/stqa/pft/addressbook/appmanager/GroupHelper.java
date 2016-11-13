@@ -75,5 +75,11 @@ public class GroupHelper extends HelperBase{
         initGroupModification();
         fillGroupForm(new GroupData("test1","test2", "test3"));
         submitGroupModification();
+        returnToGroupPage();
+    }
+
+    public int getGroupCount() {
+        return wd.findElements(By.name("selected[]")).size();
+
     }
 }
