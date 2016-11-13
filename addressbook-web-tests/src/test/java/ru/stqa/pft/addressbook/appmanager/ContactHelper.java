@@ -3,11 +3,15 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.text.DateFormatSymbols;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by User on 31.10.2016.
@@ -74,9 +78,9 @@ public class ContactHelper extends HelperBase {
        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void initContactModification()
+    public void initContactModification(int indexOf)
     {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+        wd.findElements(By.name("entry")).get(indexOf).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
     }
 
     public void submitContractModification()
@@ -84,9 +88,9 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
-    public void selectContact()
+    public void selectContact(int indexOf)
     {
-        click(By.xpath("//div/div[4]/form[2]/table/tbody/tr[2]/td[1]/input"));
+        wd.findElements(By.name("selected[]")).get(indexOf).click();
     }
 
     public void deleteContacts()
@@ -103,11 +107,6 @@ public class ContactHelper extends HelperBase {
         String[] monthNames = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return monthNames[month];
     }
-    
-//    public void createContact(ContactData c)
-//    {
-//
-//    }
 
 
     public  void createContact(ContactData c) {
@@ -117,10 +116,10 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void modifyContract()
+    public void modifyContact(ContactData c, int indexOf)
     {
-        initContactModification();
-        fillContactForm(ContactData.getRandomValidContactData(), false);
+        initContactModification(indexOf);
+        fillContactForm(c, false);
         submitContractModification();
     }
 
@@ -131,9 +130,31 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void deleteContact() {
-        selectContact();
+    public void deleteContact(int indexOf) {
+        selectContact( indexOf);
         deleteContacts();
         confirmContractsDelition();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements)
+        {
+            String email = element.findElement(By.tagName("input")).getAttribute("accept");
+            String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String address = element.findElements(By.tagName("td")).get(3).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData();
+            contact.setId(id);
+            contact.setLastName(lastName);
+            contact.setFirstName(firstName);
+            contact.setAddressHome(address);
+            contact.setEmail(email);
+            contacts.add(contact);
+        }
+
+        return contacts;
     }
 }
