@@ -39,6 +39,7 @@ public class ContactModificationTests extends TestBase {
         ContactData contact = ContactData.getRandomValidContactData().withId(modifiedContact.getId());
         app.contact().modifyContact(contact);
         app.goTo().homePage();
+
         Contacts after = app.contact().all();
 
         assertThat(after.size(),equalTo(before.size()));
