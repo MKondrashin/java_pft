@@ -15,13 +15,11 @@ public class ContactDelitionTests extends TestBase {
         if(! app.getContactHelper().isThereAContact())
         {
             app.getNavigationHelper().goToContactCreationPage();
-            app.getContactHelper().createContract(ContactData.getRandomValidContactData());
+            app.getContactHelper().createContact(ContactData.getRandomValidContactData());
             app.getNavigationHelper().goToHomePage();
         }
 
-        app.getContactHelper().selectContact();
-        app.getContactHelper().deleteContacts();
-        app.getContactHelper().confirmContractsDelition();
+        app.getContactHelper().deleteContact();
         app.getSessionHelper().logout();
     }
 

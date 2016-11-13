@@ -1,7 +1,5 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.apache.http.ContentTooLongException;
-
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
@@ -17,14 +15,14 @@ public class ContactModificationTests extends TestBase {
         if(! app.getContactHelper().isThereAContact())
         {
             app.getNavigationHelper().goToContactCreationPage();
-            app.getContactHelper().createContract(ContactData.getRandomValidContactData());
+            app.getContactHelper().createContact(ContactData.getRandomValidContactData());
             app.getNavigationHelper().goToHomePage();
         }
-        app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(ContactData.getRandomValidContactData(), false);
-        app.getContactHelper().submitContractModification();
+        app.getContactHelper().modifyContract();
         app.getSessionHelper().logout();
     }
+
+
 
 
 }

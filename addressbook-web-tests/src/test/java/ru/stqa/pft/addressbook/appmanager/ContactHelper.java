@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.text.DateFormatSymbols;
+import java.util.Calendar;
 
 /**
  * Created by User on 31.10.2016.
@@ -36,8 +37,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("phone2"), c.getHome());
         type(By.name("notes"), c.getNotes());
 
+
+        Calendar cal = Calendar.getInstance();
         //birthday and group
-        select(By.name("bday"), Integer.toString(c.getBirthday().getDay()));
+        select(By.name("bday"), Integer.toString(cal.get(Calendar.DAY_OF_MONTH )));
         select(By.name("bmonth"), getMonthForInt(c.getBirthday().getMonth()));
         type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
         if (creation)
@@ -101,15 +104,36 @@ public class ContactHelper extends HelperBase {
         return monthNames[month];
     }
     
-    public void createContract(ContactData c)
-    {
-       fillContactForm(ContactData.getRandomValidContactData(), true);
-       submitContactCreation();
+//    public void createContact(ContactData c)
+//    {
+//
+//    }
+
+
+    public  void createContact(ContactData c) {
+
+        fillContactForm(c, true);
+        submitContactCreation();
+
     }
+
+    public void modifyContract()
+    {
+        initContactModification();
+        fillContactForm(ContactData.getRandomValidContactData(), false);
+        submitContractModification();
+    }
+
 
 
     public boolean isThereAContact() {
         return isElementPresented(By.name("entry"));
 
+    }
+
+    public void deleteContact() {
+        selectContact();
+        deleteContacts();
+        confirmContractsDelition();
     }
 }

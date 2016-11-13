@@ -218,6 +218,7 @@ public class ContactData {
 
     private static String getRndAlphaString()
     {
+
         Random rnd = new Random();
         return String.format("%010d",Math.abs(rnd.nextInt()) );
     }
