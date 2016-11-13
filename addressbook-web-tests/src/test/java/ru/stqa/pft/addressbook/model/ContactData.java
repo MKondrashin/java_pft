@@ -12,6 +12,9 @@ import java.util.Random;
  */
 public class ContactData {
 
+
+
+    private int id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -37,17 +40,53 @@ public class ContactData {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactData that = (ContactData) o;
+
+        if (id != that.id) return false;
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactData{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phoneHome='" + phoneHome + '\'' +
+                ", email='" + email + '\'' +
+                ", addressHome='" + addressHome + '\'' +
+                ", group='" + group + '\'' +
+                '}';
+    }
+
     //TODO: actually randmoize contact creation
     public static ContactData getRandomValidContactData()
     {
 
 
         ContactData c = new ContactData();
+        c.setId(Integer.MAX_VALUE);
         c.setAddressHome( getRndStringWithTS());
         c.setAddressWork(getRndStringWithTS());
         c.setBirthday(new Date());
         c.setCompany(getRndStringWithTS());
-        c.setEmail("NET@RENCREDIT.INVALID");
+        c.setEmail(getRndAlphaString() + "NET@RENCREDIT.INVALID");
         c.setFax(getRndAlphaString());
         c.setFirstName(getRndStringWithTS());
         c.setMiddleName(getRndStringWithTS());
@@ -209,6 +248,14 @@ public class ContactData {
 
     public void setGroup(String group) {
         this.group = group;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     private static String getRndStringWithTS()
