@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.text.DateFormatSymbols;
@@ -78,6 +79,11 @@ public class ContactHelper extends HelperBase {
        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
+    public void initContactModificationById(int id)
+    {
+        wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
+    }
+
     public void initContactModification(int indexOf)
     {
         wd.findElements(By.name("entry")).get(indexOf).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
@@ -92,6 +98,12 @@ public class ContactHelper extends HelperBase {
     {
         wd.findElements(By.name("selected[]")).get(indexOf).click();
     }
+
+    public void selectContactById(int id)
+    {
+        wd.findElement(By.cssSelector("input[id='" + id + "']")).click();
+    }
+
 
     public void deleteContacts()
     {
@@ -156,5 +168,37 @@ public class ContactHelper extends HelperBase {
         }
 
         return contacts;
+    }
+
+    public Contacts all() {
+        Contacts contacts = new Contacts();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements)
+        {
+            String email = element.findElement(By.tagName("input")).getAttribute("accept");
+            String lastName = element.findElements(By.tagName("td")).get(1).getText();
+            String firstName = element.findElements(By.tagName("td")).get(2).getText();
+            String address = element.findElements(By.tagName("td")).get(3).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData().withId(id).withLastName(lastName)
+                    .withFirstName(firstName).withAddressHome(address).withEmail(email);
+            contacts.add(contact);
+        }
+
+        return contacts;
+    }
+
+
+    public void deleteContact(ContactData contact) {
+        selectContactById(contact.getId());
+        deleteContacts();
+        confirmContractsDelition();
+    }
+
+    public void modifyContact(ContactData contact) {
+        initContactModificationById(contact.getId());
+        fillContactForm(contact, false);
+        submitContractModification();
+
     }
 }

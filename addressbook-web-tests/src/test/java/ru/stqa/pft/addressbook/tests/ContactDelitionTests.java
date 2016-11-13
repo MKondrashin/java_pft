@@ -1,35 +1,45 @@
 package ru.stqa.pft.addressbook.tests;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.MatcherAssert;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
+import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.util.List;
+
+import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 /**
  * Created by User on 31.10.2016.
  */
 public class ContactDelitionTests extends TestBase {
 
-    @Test(enabled = false)
+    @BeforeMethod
+    public void ensurePreconditions() {
+        app.goTo().homePage();
+        if(app.contact().all().size() == 0)
+        {
+            app.goTo().contactCreationPage();
+            app.contact().createContact(ContactData.getRandomValidContactData());
+            app.goTo().homePage();
+        }
+    }
+
+    @Test(enabled = true)
     public void testContactDelition()
     {
-        app.goTo().goToHomePage();
-        if(! app.getContactHelper().isThereAContact())
-        {
-            app.goTo().goToContactCreationPage();
-            app.getContactHelper().createContact(ContactData.getRandomValidContactData());
-            app.goTo().goToHomePage();
-        }
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().deleteContact(before.size() - 1);
-        app.goTo().goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() - 1);
+        Contacts before = app.contact().all();
+        ContactData contact =  before.iterator().next();
+        app.contact().deleteContact(contact);
+        app.goTo().homePage();
+        Contacts after = app.contact().all();
 
-        before.remove(before.size() - 1);
-
-        Assert.assertEquals(before, after);
+        assertThat(after.size(), equalTo(before.size() - 1));
+        assertThat(after, equalTo(before.without(contact)));
     }
 
 }

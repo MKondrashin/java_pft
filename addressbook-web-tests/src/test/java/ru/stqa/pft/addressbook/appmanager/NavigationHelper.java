@@ -24,7 +24,7 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("groups"));
     }
 
-    public void goToContactCreationPage() {
+    public void contactCreationPage() {
         if(isElementPresented(By.tagName("h1"))
                 && isElementPresented(By.xpath("//div[@id='content']//h1[.='Edit / add address book entry']"))
                 && isElementPresented(By.name("submit"))){
@@ -33,7 +33,7 @@ public class NavigationHelper extends HelperBase{
         click(By.linkText("add new"));
     }
 
-    public void goToHomePage() {
+    public void homePage() {
         if(isElementPresented(By.id("maintable")))        {
             return;
         }

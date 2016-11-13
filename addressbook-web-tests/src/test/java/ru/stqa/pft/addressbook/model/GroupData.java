@@ -24,14 +24,6 @@ public class GroupData {
         return this;
     }
 
-    public GroupData withFooter(String footer) {
-        this.footer = footer;
-        return this;
-    }
-
-
-    private int id = Integer.MAX_VALUE;
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -39,14 +31,26 @@ public class GroupData {
 
         GroupData groupData = (GroupData) o;
 
+        if (id != groupData.id) return false;
         return name != null ? name.equals(groupData.name) : groupData.name == null;
 
     }
 
     @Override
     public int hashCode() {
-        return name != null ? name.hashCode() : 0;
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
     }
+
+    public GroupData withFooter(String footer) {
+        this.footer = footer;
+        return this;
+
+    }
+
+
+    private int id = Integer.MAX_VALUE;
 
     private String name;
 

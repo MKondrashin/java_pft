@@ -5,9 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by User on 30.10.2016.
@@ -39,10 +42,12 @@ public class GroupHelper extends HelperBase{
     }
 
     public void selectGroup(int index) {
-
         wd.findElements(By.name("selected[]")).get(index).click();
-
     }
+    public void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
 
     public void deleteSelectedGroups() {
         click(By.xpath("//div[@id='content']/form/input[5]"));
@@ -68,14 +73,10 @@ public class GroupHelper extends HelperBase{
         return isElementPresented(By.name("selected[]"));
     }
 
-    public void delete(int indexOf) {
-        selectGroup(indexOf);
-        deleteSelectedGroups();
-        returnToGroupPage();
-    }
 
-    public void modify(GroupData group, int indexOf) {
-        selectGroup(indexOf);
+
+    public void modify(GroupData group) {
+        selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm( group);
         submitGroupModification();
@@ -87,8 +88,10 @@ public class GroupHelper extends HelperBase{
 
     }
 
-    public List<GroupData> list() {
-        List<GroupData> groups = new ArrayList<GroupData>();
+
+
+    public Groups all() {
+        Groups groups = new Groups();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements)
         {
@@ -100,4 +103,12 @@ public class GroupHelper extends HelperBase{
         return groups;
 
     }
+
+    public void delete(GroupData group) {
+        selectGroupById(group.getId());
+        deleteSelectedGroups();
+        returnToGroupPage();
+    }
+
+
 }

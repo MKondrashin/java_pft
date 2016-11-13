@@ -80,26 +80,27 @@ public class ContactData {
     {
 
 
-        ContactData c = new ContactData();
-        c.setId(Integer.MAX_VALUE);
-        c.setAddressHome( getRndStringWithTS());
-        c.setAddressWork(getRndStringWithTS());
-        c.setBirthday(new Date());
-        c.setCompany(getRndStringWithTS());
-        c.setEmail(getRndAlphaString() + "NET@RENCREDIT.INVALID");
-        c.setFax(getRndAlphaString());
-        c.setFirstName(getRndStringWithTS());
-        c.setMiddleName(getRndStringWithTS());
-        c.setLastName(getRndStringWithTS());
-        c.setNickName(getRndStringWithTS());
-        c.setPhoneHome(getRndAlphaString());
-        c.setPhoneMobile("+7" + getRndAlphaString());
-        c.setHomepage("vk.com");
-        c.setTitle("Sir");
-        c.setPhoneWork(getRndAlphaString());
-        c.setHome(getRndStringWithTS());
-        c.setGroup("test22");
-        c.setNotes(getRndStringWithTS());
+        ContactData c = new ContactData()
+                .withId(Integer.MAX_VALUE)
+                .withAddressHome(getRndStringWithTS())
+                .withAddressWork(getRndStringWithTS())
+                .withBirthday(new Date())
+                .withCompany(getRndStringWithTS())
+                .withEmail(getRndAlphaString() + "NET@RENCREDIT.INVALID")
+                .withFax(getRndStringWithTS())
+                .withFirstName(getRndStringWithTS())
+                .withMiddleName(getRndStringWithTS())
+                .withLastName(getRndStringWithTS())
+                .withNickName(getRndStringWithTS())
+                .withPhoneHome(getRndStringWithTS())
+                .withPhoneMobile("+7" + getRndAlphaString())
+                .withHomePage("vk.com")
+                .withTitle("Sir")
+                .withPhoneWork(getRndAlphaString())
+                .withHome(getRndStringWithTS())
+                .withGroup("test22")
+                .withNotes(getRndStringWithTS());
+
         return c;
     }
 
@@ -269,6 +270,131 @@ public class ContactData {
         Random rnd = new Random();
         return String.format("%010d",Math.abs(rnd.nextInt()) );
     }
+
+    public ContactData withId(int id)
+    {
+        this.id=id;
+        return this;
+    }
+
+    public ContactData withFirstName(String firstName)
+    {
+        this.firstName = firstName;
+        return  this;
+    }
+
+    public ContactData withMiddleName(String middleName)
+    {
+        this.middleName = middleName;
+        return  this;
+    }
+
+    public ContactData withLastName(String lastName)
+    {
+        this.lastName = lastName;
+        return  this;
+    }
+
+    public ContactData withNickName(String nickName)
+    {
+        this.nickName = nickName;
+        return  this;
+    }
+
+    public ContactData withTitle(String title)
+    {
+        this.title = title;
+        return  this;
+    }
+
+    public ContactData withCompany(String company)
+    {
+        this.company = company;
+        return  this;
+    }
+
+    public ContactData withAddressWork(String addressWork)
+    {
+        this.addressWork = addressWork;
+        return  this;
+    }
+
+    public ContactData withPhoneHome(String phoneHome)
+    {
+        this.phoneHome = phoneHome;
+        return  this;
+    }
+
+    public ContactData withPhoneWork(String phoneWork)
+    {
+        this.phoneWork = phoneWork;
+        return  this;
+    }
+
+    public ContactData withPhoneMobile(String phoneMobile)
+    {
+        this.phoneMobile = phoneMobile;
+        return  this;
+    }
+
+    public ContactData withEmail(String email)
+    {
+        this.email = email;
+        return  this;
+    }
+
+    public ContactData withFax(String fax)
+    {
+        this.fax = fax;
+        return  this;
+    }
+
+    public ContactData withHomePage(String homepage)
+    {
+        this.homepage = homepage;
+        return  this;
+    }
+
+
+    public ContactData withAddressHome(String addressHome)
+    {
+        this.addressHome = addressHome;
+        return  this;
+    }
+
+    public ContactData withNotes(String notes)
+    {
+        this.notes = notes;
+        return  this;
+    }
+
+    public ContactData withHome(String home)
+    {
+        this.home = home;
+        return  this;
+    }
+
+    public ContactData withGroup(String group)
+    {
+        this.group = group;
+        return  this;
+    }
+
+    public ContactData withBirthday(Date birthday)
+    {
+        this.birthday = birthday;
+        return  this;
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 }
