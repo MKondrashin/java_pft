@@ -4,13 +4,9 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.text.DateFormatSymbols;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,7 +26,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("nickname"), c.getNickName());
         type(By.name("title"), c.getTitle());
         type(By.name("company"), c.getCompany());
-        type(By.name("address"), c.getAddressWork());
+        type(By.name("address"), c.getAddress2());
         type(By.name("home"), c.getPhoneHome());
         type(By.name("mobile"), c.getPhoneMobile());
         type(By.name("work"), c.getPhoneWork());
@@ -40,8 +36,8 @@ public class ContactHelper extends HelperBase {
         type(By.name("email3"), c.getEmail3());
         type(By.name("homepage"), c.getHomepage());
         type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
-        type(By.name("address2"), c.getAddressHome());
-        type(By.name("phone2"), c.getHome());
+        type(By.name("address2"), c.getAddress());
+        type(By.name("phone2"), c.getPhoneHome2());
         type(By.name("notes"), c.getNotes());
 
 
@@ -153,7 +149,7 @@ public class ContactHelper extends HelperBase {
             String allEmails = element.findElements(By.tagName("td")).get(4).getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             ContactData contact = new ContactData().withId(id).withLastName(lastName)
-                    .withFirstName(firstName).withAddressHome(address)
+                    .withFirstName(firstName).withAddress(address)
                     .withAllPhones(allPhones).withAllEmails(allEmails);
             contactsCache.add(contact);
         }
@@ -184,11 +180,14 @@ public class ContactHelper extends HelperBase {
         String lastName = wd.findElement(By.name("lastname")).getAttribute("value");
         String middleName = wd.findElement(By.name("middlename")).getAttribute("value");
         String homePhone = wd.findElement(By.name("home")).getAttribute("value");
+        String homePhone2 = wd.findElement(By.name("phone2")).getAttribute("value");
         String workPhone = wd.findElement(By.name("work")).getAttribute("value");
         String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
         String email = wd.findElement(By.name("email")).getAttribute("value");
         String email2 = wd.findElement(By.name("email2")).getAttribute("value");
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+        String address = wd.findElement(By.name("address")).getAttribute("value");
+        String address2 = wd.findElement(By.name("address2")).getAttribute("value");
 
         return new ContactData()
                 .withId(id)
@@ -200,6 +199,9 @@ public class ContactHelper extends HelperBase {
                 .withPhoneWork(workPhone)
                 .withEmail(email)
                 .withEmail2(email2)
-                .withEmail3(email3);
+                .withEmail3(email3)
+                .withAddress(address)
+                .withAddress2(address2)
+                .withPhoneHome2(homePhone2);
     }
 }

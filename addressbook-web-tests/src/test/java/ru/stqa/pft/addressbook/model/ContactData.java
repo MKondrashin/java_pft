@@ -1,8 +1,6 @@
 package ru.stqa.pft.addressbook.model;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
-import org.openqa.selenium.By;
 
 import java.util.Date;
 import java.util.Random;
@@ -21,14 +19,15 @@ public class ContactData {
     private String nickName;
     private String title;
     private String company;
-    private String addressWork;
+    private String address2;
     private String phoneHome;
+    private String phoneHome2;
     private String phoneWork;
     private String phoneMobile;
     private String email;
     private String fax;
     private String homepage;
-    private String addressHome;
+    private String address;
     private String notes;
     private Date birthday;
     private String home;
@@ -76,8 +75,14 @@ public class ContactData {
         return this;
     }
 
+    public String getPhoneHome2() {
+        return phoneHome2;
+    }
 
-
+    public ContactData withPhoneHome2(String phoneHome2) {
+        this.phoneHome2 = phoneHome2;
+        return this;
+    }
 
     public ContactData()
     {
@@ -108,8 +113,8 @@ public class ContactData {
         return company;
     }
 
-    public String getAddressWork() {
-        return addressWork;
+    public String getAddress2() {
+        return address2;
     }
 
     public String getPhoneHome() {
@@ -136,8 +141,8 @@ public class ContactData {
         return homepage;
     }
 
-    public String getAddressHome() {
-        return addressHome;
+    public String getAddress() {
+        return address;
     }
 
     public String getNotes() {
@@ -202,9 +207,9 @@ public class ContactData {
         return  this;
     }
 
-    public ContactData withAddressWork(String addressWork)
+    public ContactData withAddress2(String address2)
     {
-        this.addressWork = addressWork;
+        this.address2 = address2;
         return  this;
     }
 
@@ -245,9 +250,9 @@ public class ContactData {
     }
 
 
-    public ContactData withAddressHome(String addressHome)
+    public ContactData withAddress(String address)
     {
-        this.addressHome = addressHome;
+        this.address = address;
         return  this;
     }
 
@@ -305,7 +310,7 @@ public class ContactData {
                 ", lastName='" + lastName + '\'' +
                 ", phoneHome='" + phoneHome + '\'' +
                 ", email='" + email + '\'' +
-                ", addressHome='" + addressHome + '\'' +
+                ", address='" + address + '\'' +
                 ", group='" + group + '\'' +
                 '}';
     }
@@ -328,8 +333,8 @@ public class ContactData {
 
         ContactData c = new ContactData()
                 .withId(Integer.MAX_VALUE)
-                .withAddressHome(getRndStringWithTS())
-                .withAddressWork(getRndStringWithTS())
+                .withAddress(getRndStringWithTS())
+                .withAddress2(getRndStringWithTS())
                 .withBirthday(new Date())
                 .withCompany(getRndStringWithTS())
                 .withEmail(getRndAlphaString() + "NET@RENCREDIT.INVALID")
@@ -345,7 +350,7 @@ public class ContactData {
                 .withHomePage("vk.com")
                 .withTitle("Sir")
                 .withPhoneWork(getRndAlphaString())
-                .withHome(getRndStringWithTS())
+                .withPhoneHome2(getRndStringWithTS())
                 .withGroup("test22")
                 .withNotes(getRndStringWithTS());
 
