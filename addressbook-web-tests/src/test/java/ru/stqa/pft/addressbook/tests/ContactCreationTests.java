@@ -20,7 +20,6 @@ public class ContactCreationTests extends TestBase {
     
     @Test(enabled = true)
     public void ContactCreationTests() {
-
         app.goTo().homePage();
         Contacts before = app.contact().all();
         app.goTo().contactCreationPage();
@@ -32,8 +31,6 @@ public class ContactCreationTests extends TestBase {
         assertThat(after.size(), equalTo(before.size() + 1));
         assertThat(after,equalTo(before.withAdded(contact.
                 withId(after.stream().mapToInt((c)-> c.getId()).max().getAsInt()))));
-
-
     }
     
 

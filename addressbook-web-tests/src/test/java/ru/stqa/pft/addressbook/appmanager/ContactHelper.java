@@ -66,14 +66,6 @@ public class ContactHelper extends HelperBase {
         }
     }
 
-    public void fillContactModification()
-    {
-        type(By.name("firstname"),"FNAME MODIFIED");
-        type(By.name("middlename"),"MNAME MODIFIED");
-        type(By.name("lastname"),"LNM MODIFIED");
-    }
-
-
     public void submitContactCreation()
     {
        click(By.xpath("//div[@id='content']/form/input[21]"));
@@ -84,10 +76,6 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
-    public void initContactModification(int indexOf)
-    {
-        wd.findElements(By.name("entry")).get(indexOf).findElements(By.tagName("td")).get(7).findElement(By.tagName("a")).click();
-    }
 
     public void submitContractModification()
     {
@@ -128,12 +116,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    public void modifyContact(ContactData c, int indexOf)
-    {
-        initContactModification(indexOf);
-        fillContactForm(c, false);
-        submitContractModification();
-    }
+
 
 
 
@@ -148,29 +131,7 @@ public class ContactHelper extends HelperBase {
         confirmContractsDelition();
     }
 
-    public List<ContactData> getContactList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.name("entry"));
-        for (WebElement element : elements)
-        {
-            String email = element.findElement(By.tagName("input")).getAttribute("accept");
-            String lastName = element.findElements(By.tagName("td")).get(1).getText();
-            String firstName = element.findElements(By.tagName("td")).get(2).getText();
-            String address = element.findElements(By.tagName("td")).get(3).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData();
-            contact.setId(id);
-            contact.setLastName(lastName);
-            contact.setFirstName(firstName);
-            contact.setAddressHome(address);
-            contact.setEmail(email);
-            contacts.add(contact);
-        }
-
-        return contacts;
-    }
-
-    public Contacts all() {
+      public Contacts all() {
         Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements)
