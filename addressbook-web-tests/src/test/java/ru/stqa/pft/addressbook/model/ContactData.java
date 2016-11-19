@@ -37,6 +37,28 @@ public class ContactData {
     private String email3;
     private String allEmails;
 
+    public String getAllData() {
+        return allData;
+    }
+
+    public ContactData withAllData(String allData) {
+        this.allData = allData;
+        return this;
+    }
+
+    private String allData;
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public ContactData withFullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    private String fullName;
+
     public String getAllEmails() {
         return allEmails;
     }

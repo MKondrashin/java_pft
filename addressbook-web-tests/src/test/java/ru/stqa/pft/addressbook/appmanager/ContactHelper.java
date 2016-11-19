@@ -6,9 +6,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.tests.ContactDetailedInformationTests;
+import ru.stqa.pft.addressbook.tests.ContactPhoneTests;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by User on 31.10.2016.
@@ -74,6 +79,10 @@ public class ContactHelper extends HelperBase {
         wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
     }
 
+    public void openDetails(int id)
+    {
+        wd.findElement(By.cssSelector("a[href='view.php?id=" + id + "']")).click();
+    }
 
     public void submitContractModification()
     {
@@ -174,6 +183,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public ContactData infoFromEditForm(ContactData contact) {
+        String url = wd.getCurrentUrl();
+
         initContactModificationById(contact.getId());
         int id = Integer.parseInt(wd.findElement(By.name("id")).getAttribute("value"));
         String firstName = wd.findElement(By.name("firstname")).getAttribute("value");
@@ -188,7 +199,7 @@ public class ContactHelper extends HelperBase {
         String email3 = wd.findElement(By.name("email3")).getAttribute("value");
         String address = wd.findElement(By.name("address")).getAttribute("value");
         String address2 = wd.findElement(By.name("address2")).getAttribute("value");
-
+        wd.get(url);
         return new ContactData()
                 .withId(id)
                 .withFirstName(firstName)
@@ -204,4 +215,29 @@ public class ContactHelper extends HelperBase {
                 .withAddress2(address2)
                 .withPhoneHome2(homePhone2);
     }
+
+    public ContactData infoFromDetailedInformationForm(ContactData contact) {
+        String url = wd.getCurrentUrl();
+        ContactData c = new ContactData();
+        openDetails(contact.getId());
+        //gettting emails
+        List<WebElement> elements = wd.findElements(By.cssSelector("a[href^='mailto'"));
+        List<String> emails = new ArrayList<String>();
+        for(WebElement element : elements)
+        {
+            emails.add(element.getText());
+        }
+        String allText = wd.findElement(By.xpath("//*[@id='content']")).getText();
+        String fullName = wd.findElement(By.xpath("//*[@id=\"content\"]/b")).getText();
+        allText = allText.replaceAll("P: |H: |M: |W: ","").replaceAll("\n{2,}","\n").replaceAll(" ","\n");
+        allText = Arrays.asList(allText.split("\n")).stream().filter((s) -> ! s.equals(""))
+                .map(ContactDetailedInformationTests::cleaned).sorted()
+                .collect(Collectors.joining("\n"));
+
+        wd.get(url);
+        return c.withAllData(allText);
+
+    }
+
+
 }
