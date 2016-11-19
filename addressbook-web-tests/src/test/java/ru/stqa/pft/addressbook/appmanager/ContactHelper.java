@@ -44,7 +44,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("address2"), c.getAddress());
         type(By.name("phone2"), c.getPhoneHome2());
         type(By.name("notes"), c.getNotes());
-
+        attach(By.name("photo"),c.getPhoto());
 
         Calendar cal = Calendar.getInstance();
         //birthday and group

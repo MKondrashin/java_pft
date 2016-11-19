@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.List;
 
@@ -23,7 +24,10 @@ public class ContactCreationTests extends TestBase {
         app.goTo().homePage();
         Contacts before = app.contact().all();
         app.goTo().contactCreationPage();
-        ContactData contact  = ContactData.getRandomValidContactData();
+        //ContactData contact  = ContactData.getRandomValidContactData();
+        File photo = new File("src/test/resources/1464007636144622393.jpg");
+        ContactData contact  = new ContactData().withFirstName("test_name").withLastName("test_surname")
+                .withPhoto(photo);
         app.contact().createContact(contact);
         app.goTo().homePage();
         Contacts after  = app.contact().all();
