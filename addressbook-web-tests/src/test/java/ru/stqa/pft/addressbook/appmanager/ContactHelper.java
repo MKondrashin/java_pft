@@ -9,6 +9,7 @@ import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.tests.ContactDetailedInformationTests;
 import ru.stqa.pft.addressbook.tests.ContactPhoneTests;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("address2"), c.getAddress());
         type(By.name("phone2"), c.getPhoneHome2());
         type(By.name("notes"), c.getNotes());
-        attach(By.name("photo"),c.getPhoto());
+        attach(By.name("photo"),new File(c.getPhoto()));
 
         Calendar cal = Calendar.getInstance();
         //birthday and group

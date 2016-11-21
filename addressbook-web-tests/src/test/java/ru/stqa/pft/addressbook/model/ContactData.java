@@ -43,13 +43,13 @@ public class ContactData {
     private String email2;
     private String email3;
     private String allEmails;
-    private File   photo;
+    private String   photo;
 
-    public File getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public ContactData withPhoto(File photo) {
+    public ContactData withPhoto(String photo) {
         this.photo = photo;
         return this;
     }
