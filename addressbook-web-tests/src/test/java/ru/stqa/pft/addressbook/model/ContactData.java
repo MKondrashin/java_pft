@@ -1,5 +1,9 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.io.File;
@@ -9,11 +13,13 @@ import java.util.Random;
 /**
  * Created by User on 31.10.2016.
  */
+@XStreamAlias("contact")
 public class ContactData {
 
 
-
+    @XStreamOmitField
     private int id;
+
     private String firstName;
     private String middleName;
     private String lastName;
@@ -346,48 +352,6 @@ public class ContactData {
                 ", address='" + address + '\'' +
                 ", group='" + group + '\'' +
                 '}';
-    }
-
-    private static String getRndStringWithTS()
-    {
-        return RandomStringUtils.randomAlphabetic(5) + Long.toString(System.currentTimeMillis());
-    }
-
-    private static String getRndAlphaString()
-    {
-        Random rnd = new Random();
-        return String.format("%010d",Math.abs(rnd.nextInt()) );
-    }
-
-    //TODO: actually randmoize contact creation
-    public static ContactData getRandomValidContactData()
-    {
-
-
-        ContactData c = new ContactData()
-                .withId(Integer.MAX_VALUE)
-                .withAddress(getRndStringWithTS())
-                .withAddress2(getRndStringWithTS())
-                .withBirthday(new Date())
-                .withCompany(getRndStringWithTS())
-                .withEmail(getRndAlphaString() + "NET@RENCREDIT.INVALID")
-                .withEmail2(getRndAlphaString() + "NET@RENCREDIT.INVALID")
-                .withEmail3(getRndAlphaString() + "NET@RENCREDIT.INVALID")
-                .withFax(getRndStringWithTS())
-                .withFirstName(getRndStringWithTS())
-                .withMiddleName(getRndStringWithTS())
-                .withLastName(getRndStringWithTS())
-                .withNickName(getRndStringWithTS())
-                .withPhoneHome(getRndStringWithTS())
-                .withPhoneMobile("+7" + getRndAlphaString())
-                .withHomePage("vk.com")
-                .withTitle("Sir")
-                .withPhoneWork(getRndAlphaString())
-                .withPhoneHome2(getRndStringWithTS())
-                .withGroup("test22")
-                .withNotes(getRndStringWithTS());
-
-        return c;
     }
 
 }

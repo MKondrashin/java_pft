@@ -1,8 +1,8 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.generators.ContactDataGenerator;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,7 +21,7 @@ public class ContactAddressTests extends TestBase {
         if(app.contact().all().size() == 0)
         {
             app.goTo().contactCreationPage();
-            app.contact().createContact(ContactData.getRandomValidContactData());
+            app.contact().createContact(ContactDataGenerator.getRandomValidContactData());
             app.goTo().homePage();
         }
     }

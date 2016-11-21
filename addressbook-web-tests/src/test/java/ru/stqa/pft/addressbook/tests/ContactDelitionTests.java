@@ -1,14 +1,10 @@
 package ru.stqa.pft.addressbook.tests;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import ru.stqa.pft.addressbook.generators.ContactDataGenerator;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-
-import java.util.List;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
@@ -24,7 +20,7 @@ public class ContactDelitionTests extends TestBase {
         if(app.contact().all().size() == 0)
         {
             app.goTo().contactCreationPage();
-            app.contact().createContact(ContactData.getRandomValidContactData());
+            app.contact().createContact(ContactDataGenerator.getRandomValidContactData());
             app.goTo().homePage();
         }
     }
