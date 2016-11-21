@@ -162,9 +162,10 @@ public class ContactDataGenerator {
     private void saveAsJson(List<ContactData> contacts, File file) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new ContactDataGsonExclusionStrategy(ContactData.class)).create();
         String json = gson.toJson(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(json);
-        writer.close();
+
+        try(Writer writer = new FileWriter(file))        {
+            writer.write(json);
+        }
 
     }
 
@@ -172,23 +173,22 @@ public class ContactDataGenerator {
         XStream xstream = new XStream();
         xstream.processAnnotations(ContactData.class);
         String xml = xstream.toXML(contacts);
-        Writer writer = new FileWriter(file);
-        writer.write(xml);
-        writer.close();
+        try(Writer writer = new FileWriter(file)) {
+            writer.write(xml);
+        }
     }
 
 
     private static void saveAsCsv(List<ContactData> contacts, File file) throws IOException {
-        Writer writer = new FileWriter(file);
-        for(ContactData contact : contacts)
-        {
-            String s = getRandomValidContactData().toString()
-                    .replaceAll(",",";")
-                    .replaceAll("\\w+=","")
-                    .replaceAll("ContactData\\{|'|\\}","");
-            writer.write(s + "\n");
+        try(Writer writer = new FileWriter(file)) {
+            for (ContactData contact : contacts) {
+                String s = getRandomValidContactData().toString()
+                        .replaceAll(",", ";")
+                        .replaceAll("\\w+=", "")
+                        .replaceAll("ContactData\\{|'|\\}", "");
+                writer.write(s + "\n");
+            }
         }
-        writer.close();
     }
 
     private static List<ContactData> generateContacts(int count) {
