@@ -1,5 +1,8 @@
 package ru.stqa.pft.addressbook.generators;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.io.File;
@@ -13,10 +16,30 @@ import java.util.List;
  * Created by User on 19.11.2016.
  */
 public class GroupDataGenerator {
-    public static void main(String[] args) throws IOException {
-        int count = Integer.parseInt(args[0]);
-        File file = new File(args[1]);
 
+    @Parameter(names="-c", description = "count of groups to generate")
+    public static int count;
+
+    @Parameter(names="-f", description = "path to target file")
+    public static String pathTofile;
+
+    public static void main(String[] args) throws IOException {
+        GroupDataGenerator g = new GroupDataGenerator();
+        JCommander commander = new JCommander(g);
+        try
+        {
+            commander.parse(args);
+        }
+        catch(ParameterException e)
+        {
+            System.out.println("Incorrect usage:");
+            commander.usage();
+            return;
+        }
+
+
+
+        File file = new File(pathTofile);
         List<GroupData> groups = generateGroups(count);
         save(groups,file);
     }
