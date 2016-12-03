@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
-
 /**
  * Created by User on 31.10.2016.
  */
@@ -26,6 +25,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void fillContactForm(ContactData c, boolean creation) {
+
         type(By.name("firstname"), c.getFirstName());
         type(By.name("middlename"), c.getMiddleName());
         type(By.name("lastname"), c.getLastName());
