@@ -5,7 +5,13 @@ import com.google.gson.FieldAttributes;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.hibernate.annotations.Table;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.io.File;
 import java.util.Date;
 import java.util.Random;
@@ -14,36 +20,98 @@ import java.util.Random;
  * Created by User on 31.10.2016.
  */
 @XStreamAlias("contact")
+@Entity
+@javax.persistence.Table(name="addressbook")
 public class ContactData {
 
 
     @XStreamOmitField
+    @Id
+    @Column(name="id")
     private int id;
 
+    @Column(name="firstname")
     private String firstName;
+
     private String middleName;
+    @Column(name="lastname")
     private String lastName;
+
+    @Transient
     private String nickName;
+
+    @Transient
     private String title;
+
+    @Transient
     private String company;
+
+    @Transient
     private String address2;
+
+    @Column(name="home")
+    @Type(type="text")
     private String phoneHome;
+
+    @Transient
     private String phoneHome2;
+
+    @Column(name="work")
+    @Type(type="text")
     private String phoneWork;
+    @Column(name="mobile")
+    @Type(type="text")
     private String phoneMobile;
+
+    @Column(name="email")
+    @Type(type="text")
     private String email;
+
+    @Transient
     private String fax;
+
+    @Transient
     private String homepage;
+
+    @Transient
     private String address;
+
+    @Transient
     private String notes;
+
+    @Transient
     private Date birthday;
+
+    @Transient
     private String home;
+
+    @Transient
     private String group;
+
+    @Transient
     private String allPhones;
+
+    @Column(name="email2")
+    @Type(type="text")
     private String email2;
+
+    @Column(name="email3")
+    @Type(type="text")
     private String email3;
+
+    @Transient
     private String allEmails;
+
+    @Column(name="photo")
+    @Type(type="text")
     private String   photo;
+
+    @Transient
+    private String allData;
+
+    @Transient
+    private String fullName;
+
 
     public String getPhoto() {
         return photo;
@@ -63,7 +131,6 @@ public class ContactData {
         return this;
     }
 
-    private String allData;
 
     public String getFullName() {
         return fullName;
@@ -74,7 +141,7 @@ public class ContactData {
         return this;
     }
 
-    private String fullName;
+
 
     public String getAllEmails() {
         return allEmails;
@@ -328,7 +395,13 @@ public class ContactData {
 
         if (id != that.id) return false;
         if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
-        return lastName != null ? lastName.equals(that.lastName) : that.lastName == null;
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+        if (phoneHome != null ? !phoneHome.equals(that.phoneHome) : that.phoneHome != null) return false;
+        if (phoneWork != null ? !phoneWork.equals(that.phoneWork) : that.phoneWork != null) return false;
+        if (phoneMobile != null ? !phoneMobile.equals(that.phoneMobile) : that.phoneMobile != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+        return email3 != null ? email3.equals(that.email3) : that.email3 == null;
 
     }
 
@@ -337,6 +410,12 @@ public class ContactData {
         int result = id;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (phoneHome != null ? phoneHome.hashCode() : 0);
+        result = 31 * result + (phoneWork != null ? phoneWork.hashCode() : 0);
+        result = 31 * result + (phoneMobile != null ? phoneMobile.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+        result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         return result;
     }
 

@@ -16,8 +16,8 @@ public class ContactDelitionTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
-        app.goTo().homePage();
-        if(app.contact().all().size() == 0)
+
+        if(app.db().contacts().size() == 0)
         {
             app.goTo().contactCreationPage();
             app.contact().createContact(ContactDataGenerator.getRandomValidContactData());
@@ -28,11 +28,13 @@ public class ContactDelitionTests extends TestBase {
     @Test(enabled = true)
     public void testContactDelition()
     {
-        Contacts before = app.contact().all();
+        Contacts before = app.db().contacts();
         ContactData contact =  before.iterator().next();
+        app.goTo().homePage();
         app.contact().deleteContact(contact);
         app.goTo().homePage();
-        Contacts after = app.contact().all();
+
+        Contacts after = app.db().contacts();
 
         assertThat(after.size(), equalTo(before.size() - 1));
         assertThat(after, equalTo(before.without(contact)));
