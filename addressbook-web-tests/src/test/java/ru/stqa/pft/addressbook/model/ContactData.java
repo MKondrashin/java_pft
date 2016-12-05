@@ -8,13 +8,12 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.annotations.Table;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by User on 31.10.2016.
@@ -85,8 +84,13 @@ public class ContactData {
     @Transient
     private String home;
 
-    @Transient
-    private String group;
+//    @Transient
+//    private String group;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="address_in_groups",
+            joinColumns = @JoinColumn(name="id"), inverseJoinColumns = @JoinColumn(name="group_id"))
+    private Set<GroupData> groups = new HashSet<GroupData>();
 
     @Transient
     private String allPhones;
@@ -263,9 +267,9 @@ public class ContactData {
         return home;
     }
 
-    public String getGroup() {
-        return group;
-    }
+//    public String getGroup() {
+//        return group;
+//    }
 
     public int getId() {
         return id;
@@ -374,11 +378,11 @@ public class ContactData {
         return  this;
     }
 
-    public ContactData withGroup(String group)
-    {
-        this.group = group;
-        return  this;
-    }
+//    public ContactData withGroup(String group)
+//    {
+//        this.group = group;
+//        return  this;
+//    }
 
     public ContactData withBirthday(Date birthday)
     {
@@ -419,6 +423,14 @@ public class ContactData {
         return result;
     }
 
+    public Groups getGroups() {
+        return new Groups(groups);
+    }
+
+    public void setGroups(Set<GroupData> groups) {
+        this.groups = groups;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
@@ -429,8 +441,12 @@ public class ContactData {
                 ", phoneHome='" + phoneHome + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
-                ", group='" + group + '\'' +
+                //", group='" + group + '\'' +
                 '}';
     }
 
+    public ContactData inGroup(GroupData group) {
+        groups.add(group);
+        return this;
+    }
 }

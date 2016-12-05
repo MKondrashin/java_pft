@@ -84,7 +84,7 @@ public class ContactDataGenerator {
                 .withTitle("Sir")
                 .withPhoneWork(getRndAlphaString())
                 .withPhoneHome2(getRndStringWithTS())
-                .withGroup("test22")
+                //.withGroup("test22")
                 .withNotes(getRndStringWithTS())
                 .withPhoto("src/test/resources/1464007636144622393.jpg");
 

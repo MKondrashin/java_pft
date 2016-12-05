@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.apache.http.util.Asserts;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -54,9 +55,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("byear"), Integer.toString(c.getBirthday().getYear()));
         if (creation)
         {
-            if(isElementPresented(By.xpath("//div[@id='content']/form/select[@name='new_group']/option[text()='" + c.getGroup() + "']")))
+            if(c.getGroups().size() > 0)
             {
-                select(By.name("new_group"), c.getGroup());
+                org.testng.Assert.assertTrue(c.getGroups().size() == 1);
+                select(By.name("new_group"), c.getGroups().iterator().next().getName());
             }
             else
             {
