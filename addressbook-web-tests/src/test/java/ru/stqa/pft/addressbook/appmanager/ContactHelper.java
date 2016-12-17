@@ -251,4 +251,14 @@ public class ContactHelper extends HelperBase {
         click(By.name("add"));
 
     }
+
+    public void removeContactFromGroup(ContactData contact, GroupData group) {
+        select(By.name("group"), wd.findElement(By.xpath(String.format("//*[@id='right']/select/option[@value='%d']",group.getId()))).getText());
+        selectContactById(contact.getId());
+        click(By.name("remove"));
+    }
+
+    public void selectAllGroups() {
+        select(By.name("group"), "[all]");
+    }
 }

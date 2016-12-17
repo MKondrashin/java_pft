@@ -48,7 +48,7 @@ public class ContactDataGenerator {
         g.run();
     }
 
-    private static String getRndStringWithTS()
+    public static String getRndStringWithTS()
     {
         return RandomStringUtils.randomAlphabetic(5) + Long.toString(System.currentTimeMillis());
     }

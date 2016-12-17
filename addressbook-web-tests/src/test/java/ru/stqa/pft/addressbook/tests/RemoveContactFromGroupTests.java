@@ -9,14 +9,12 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Created by User on 17.12.2016.
  */
-public class AddContactToGroupTests extends TestBase {
+public class RemoveContactFromGroupTests extends TestBase {
 
 
     private ContactData contact;
@@ -37,26 +35,26 @@ public class AddContactToGroupTests extends TestBase {
             app.group().create(new GroupData().withName(ContactDataGenerator.getRndStringWithTS()).withFooter(ContactDataGenerator.getRndStringWithTS()).withHeader(ContactDataGenerator.getRndStringWithTS()));
             app.goTo().homePage();
         }
-        contact = app.db().contacts().iterator().next();
-        group = app.db().groups().iterator().next();
-        if(group.getContacts().contains(contact))
+        if(app.db().groups().stream().filter( g-> g.getContacts()!=null && g.getContacts().size() > 0).collect(Collectors.toSet()).size() ==0)
         {
-            app.contact().removeContactFromGroup(contact, group);
             app.goTo().homePage();
-            app.contact().selectAllGroups();
+            app.contact().addContactToGroup(
+                    app.db().contacts().iterator().next(),
+                    app.db().groups().iterator().next()
+            );
         }
-
+        group = app.db().groups().stream().filter(g-> g.getContacts()!=null && g.getContacts().size() > 0).iterator().next();
+        contact = group.getContacts().iterator().next();
     }
 
 
     @Test(enabled = true)
-    public void testAddContactToGroup()
-    {
+    public void testRemoveContactFromGroup() {
         app.goTo().homePage();
-        app.contact().addContactToGroup(contact,group);
+        app.contact().removeContactFromGroup(contact, group);
         app.goTo().homePage();
-        contact = app.db().contacts().stream().filter(c-> c.getId()==contact.getId()).iterator().next();
-        assertThat(contact.getGroups().contains(group), equalTo(true));
+        group = app.db().groups().stream().filter(g->g.getId() == group.getId()).iterator().next();
+        assertThat(group.getContacts().contains(contact),equalTo(false));
     }
 
 }
