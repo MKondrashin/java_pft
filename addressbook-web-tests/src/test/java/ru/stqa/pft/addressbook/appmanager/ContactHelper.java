@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.tests.ContactDetailedInformationTests;
 import ru.stqa.pft.addressbook.tests.ContactPhoneTests;
 
@@ -243,4 +244,11 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void addContactToGroup(ContactData contact, GroupData group) {
+
+        selectContactById(contact.getId());
+        select(By.name("to_group"),wd.findElement(By.xpath(String.format("//*[@id=\'content\']/form[2]/div[4]/select/option[@value='%d']",group.getId()))).getText());
+        click(By.name("add"));
+
+    }
 }
