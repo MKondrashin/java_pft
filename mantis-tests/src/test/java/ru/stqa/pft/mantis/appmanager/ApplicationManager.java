@@ -21,6 +21,8 @@ public class ApplicationManager {
     private String browser;
     private final Properties properties;
     private RegistrationHelper registration;
+    private FtpHelper ftp;
+    private MailHelper mailHelper;
 
     public ApplicationManager(String browser) {
 
@@ -34,9 +36,6 @@ public class ApplicationManager {
 
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
-
-
-
     }
 
 
@@ -50,6 +49,16 @@ public class ApplicationManager {
     {
         return properties.getProperty(key);
     }
+
+    public FtpHelper ftp()
+    {
+        if(ftp==null)
+        {
+            ftp = new FtpHelper(this);
+        }
+        return ftp;
+    }
+
 
 
     public HttpSession newSession()
@@ -86,4 +95,15 @@ public class ApplicationManager {
         }
         return wd;
     }
+
+    public MailHelper mail()
+    {
+     if(mailHelper==null)
+     {
+         mailHelper = new MailHelper(this);
+
+     }
+     return mailHelper;
+    }
+
 }
