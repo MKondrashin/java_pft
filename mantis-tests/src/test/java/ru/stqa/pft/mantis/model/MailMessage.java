@@ -1,7 +1,7 @@
 package ru.stqa.pft.mantis.model;
 
 /**
- * Created by User on 18.12.2016.
+ * Created by UserData on 18.12.2016.
  */
 public class MailMessage {
     String recepient;

@@ -7,7 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * Created by User on 18.12.2016.
+ * Created by UserData on 18.12.2016.
  */
 public class FtpHelper {
     private final ApplicationManager app;

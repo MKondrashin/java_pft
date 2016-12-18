@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by User on 30.10.2016.
+ * Created by UserData on 30.10.2016.
  */
 public class TestBase {
 

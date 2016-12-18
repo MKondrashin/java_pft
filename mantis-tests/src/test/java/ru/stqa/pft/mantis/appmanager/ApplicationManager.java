@@ -13,7 +13,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by User on 30.10.2016.
+ * Created by UserData on 30.10.2016.
  */
 public class ApplicationManager {
 
@@ -23,6 +23,10 @@ public class ApplicationManager {
     private RegistrationHelper registration;
     private FtpHelper ftp;
     private MailHelper mailHelper;
+    private DbHelper dbHelper;
+    private NavigationHelper navigationHelper;
+    private SessionHelper sessionHelper;
+    private UserHelper userHelper;
 
     public ApplicationManager(String browser) {
 
@@ -105,5 +109,33 @@ public class ApplicationManager {
      }
      return mailHelper;
     }
+
+    public DbHelper db() {
+        if(dbHelper == null)
+        {
+            dbHelper = new DbHelper();
+        }
+        return dbHelper;}
+
+    public NavigationHelper goTo() {
+        if(navigationHelper == null)
+        {
+            navigationHelper = new NavigationHelper(this);
+        }
+        return navigationHelper;}
+
+    public SessionHelper getSessionHelper() {
+        if(sessionHelper == null)
+        {
+            sessionHelper = new SessionHelper(this);
+        }
+        return sessionHelper;}
+
+    public UserHelper user() {
+        if(userHelper == null)
+        {
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;}
 
 }

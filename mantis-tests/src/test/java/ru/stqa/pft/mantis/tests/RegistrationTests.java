@@ -12,7 +12,7 @@ import java.util.List;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 17.12.2016.
+ * Created by UserData on 17.12.2016.
  */
 public class RegistrationTests extends TestBase {
 

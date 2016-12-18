@@ -16,7 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 /**
- * Created by User on 17.12.2016.
+ * Created by UserData on 17.12.2016.
  */
 public class HttpSession {
 

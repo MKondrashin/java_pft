@@ -6,7 +6,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.io.File;
 
 /**
- * Created by User on 30.10.2016.
+ * Created by UserData on 30.10.2016.
  */
 public class HelperBase {
     protected WebDriver wd;

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by User on 18.12.2016.
+ * Created by UserData on 18.12.2016.
  */
 public class MailHelper {
 

@@ -8,7 +8,7 @@ import java.io.IOException;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by User on 17.12.2016.
+ * Created by UserData on 17.12.2016.
  */
 public class LoginTests extends TestBase {
     @Test

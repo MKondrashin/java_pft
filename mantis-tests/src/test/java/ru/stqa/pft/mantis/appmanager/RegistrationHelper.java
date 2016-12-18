@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Created by User on 17.12.2016.
+ * Created by UserData on 17.12.2016.
  */
 public class RegistrationHelper extends HelperBase{
     //private final ApplicationManager app;
