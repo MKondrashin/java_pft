@@ -20,6 +20,7 @@ public class ApplicationManager {
     WebDriver wd;
     private String browser;
     private final Properties properties;
+    private RegistrationHelper registration;
 
     public ApplicationManager(String browser) {
 
@@ -34,26 +35,55 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
 
-        if(browser.equals(BrowserType.FIREFOX)){
-            System.setProperty("webdriver.gecko.driver",properties.getProperty("web.pathToFirefoxDriver"));
-            wd = new FirefoxDriver();
-        } else if(browser.equals(BrowserType.CHROME)) {
-            System.setProperty("webdriver.chrome.driver",properties.getProperty("web.pathToChromeDriver"));
-            wd = new ChromeDriver();
-        } else if (browser.equals(BrowserType.IE))
-        {
-            System.setProperty("webdriver.ie.driver",properties.getProperty("web.pathToIeDriver"));
-            wd = new InternetExplorerDriver();
-        }
 
-        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        wd.get(properties.getProperty("web.baseUrl"));// "http://localhost/addressbook");
 
     }
 
 
     public void stop() {
-        wd.quit();
+       if(wd != null) {
+           wd.quit();
+       }
     }
 
+    public String getProperty(String key)
+    {
+        return properties.getProperty(key);
+    }
+
+
+    public HttpSession newSession()
+    {
+        return  new HttpSession(this);
+    }
+
+    public RegistrationHelper registration() {
+        if(registration==null)
+        {
+            registration = new RegistrationHelper(this);
+        }
+
+        return registration;
+    }
+
+    public WebDriver getDriver() {
+        if(wd == null)
+        {
+            if(browser.equals(BrowserType.FIREFOX)){
+                System.setProperty("webdriver.gecko.driver",properties.getProperty("web.pathToFirefoxDriver"));
+                wd = new FirefoxDriver();
+            } else if(browser.equals(BrowserType.CHROME)) {
+                System.setProperty("webdriver.chrome.driver",properties.getProperty("web.pathToChromeDriver"));
+                wd = new ChromeDriver();
+            } else if (browser.equals(BrowserType.IE))
+            {
+                System.setProperty("webdriver.ie.driver",properties.getProperty("web.pathToIeDriver"));
+                wd = new InternetExplorerDriver();
+            }
+
+            wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+            wd.get(properties.getProperty("web.baseUrl"));// "http://localhost/addressbook");
+        }
+        return wd;
+    }
 }
