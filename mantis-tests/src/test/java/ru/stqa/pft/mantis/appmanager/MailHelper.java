@@ -6,6 +6,7 @@ import org.subethamail.wiser.Wiser;
 import org.subethamail.wiser.WiserMessage;
 import ru.stqa.pft.mantis.model.MailMessage;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -52,6 +53,20 @@ public class MailHelper {
         try {
             MimeMessage mm = m.getMimeMessage();
             return new MailMessage(mm.getAllRecipients()[0].toString(),(String)mm.getContent());
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static MailMessage toModelMail(Message m)
+    {
+        try {
+
+            return new MailMessage(m.getAllRecipients()[0].toString(),(String)m.getContent());
         } catch (MessagingException e) {
             e.printStackTrace();
             return null;

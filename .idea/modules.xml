@@ -9,6 +9,9 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_main.iml" group="mantis-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" filepath="$PROJECT_DIR$/.idea/modules/mantis-tests_test.iml" group="mantis-tests" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/sandbox.iml" filepath="$PROJECT_DIR$/.idea/modules/sandbox.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_main.iml" group="soap-sample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" filepath="$PROJECT_DIR$/.idea/modules/soap-sample_test.iml" group="soap-sample" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2.iml" filepath="$PROJECT_DIR$/.idea/modules/task2.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2_main.iml" filepath="$PROJECT_DIR$/.idea/modules/task2_main.iml" group="task2" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/task2_test.iml" filepath="$PROJECT_DIR$/.idea/modules/task2_test.iml" group="task2" />
