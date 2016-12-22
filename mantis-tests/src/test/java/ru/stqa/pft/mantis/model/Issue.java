@@ -3,8 +3,7 @@ package ru.stqa.pft.mantis.model;
 /**
  * Created by User on 22.12.2016.
  */
-public class Issue {
-    int id;
+public class Issue extends IdentifiableNamedEntity {
     String summary;
     String description;
     Project project;
@@ -59,6 +58,5 @@ public class Issue {
     public Issue withProject(Project project) {
         this.project = project;
         return this;
-
     }
 }

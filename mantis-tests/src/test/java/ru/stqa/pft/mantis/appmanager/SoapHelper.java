@@ -1,7 +1,10 @@
 package ru.stqa.pft.mantis.appmanager;
 
 import biz.futureware.mantis.rpc.soap.client.*;
+import org.apache.axis.AxisFault;
 import ru.stqa.pft.mantis.model.Issue;
+import ru.stqa.pft.mantis.model.IssueStatus;
+import ru.stqa.pft.mantis.model.IssueStatuses;
 import ru.stqa.pft.mantis.model.Project;
 
 import javax.xml.rpc.ServiceException;
@@ -10,6 +13,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.rmi.RemoteException;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -37,9 +41,10 @@ public class SoapHelper {
 
     public Issue addIssue(Issue issue) throws MalformedURLException, ServiceException, RemoteException {
         MantisConnectPortType mc = getMantisConnect();
+
         String[] categories = mc.mc_project_get_categories("administrator", "root", BigInteger.valueOf(issue.getProject().getId()));
         IssueData issueData = new IssueData();
-        issueData.setSummary(issue.getSummary());
+
         issueData.setDescription(issue.getDescription());
         issueData.setCategory(categories[0]);
         issueData.setProject(new ObjectRef(BigInteger.valueOf(issue.getProject().getId()), issue.getProject().getName()));
@@ -49,5 +54,29 @@ public class SoapHelper {
                 withDescription(createdIssueData.getDescription()).
                 withSummary(createdIssueData.getSummary()).
                 withProject(new Project().withId(createdIssueData.getProject().getId().intValue()).withName(createdIssueData.getProject().getName()));
+    }
+
+    public List<IssueStatus> getAllIssueStatuses() throws MalformedURLException, ServiceException, RemoteException {
+        MantisConnectPortType mc = getMantisConnect();
+        return  Arrays.asList(mc.mc_enum_status("administrator", "root"))
+                .stream().map(ms-> (IssueStatus) new IssueStatus().withId(ms.getId().intValue()).withName(ms.getName()))
+                .collect(Collectors.toList());
+    }
+
+    public IssueStatus getIssueStatusById(int issueId) throws MalformedURLException, ServiceException, RemoteException {
+        try{
+            MantisConnectPortType mc = getMantisConnect();
+            IssueData issueData = mc.mc_issue_get("administrator", "root", BigInteger.valueOf(issueId));
+            return IssueStatuses.getById(issueData.getStatus().getId());
+        }
+        catch (AxisFault f){
+            if(f.getFaultString().equals("Issue does not exist")){
+                return  IssueStatuses.NOT_EXISTS();
+            }
+            else{
+                throw f;
+            }
+        }
+
     }
 }
