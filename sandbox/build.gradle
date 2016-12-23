@@ -1,3 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 mainClassName="ru.stqa.pft.sandbox.Hello"
+
+test{
+	useTestNG()
+}
