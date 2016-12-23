@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.tests;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import javassist.bytecode.analysis.Executor;
+import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.SystemClock;
@@ -67,10 +68,24 @@ public class TestBase {
 
     boolean isIssueOpen(int issueId) throws IOException {
 
-        String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json")).returnContent().asString();
-        JsonElement parsed = new JsonParser().parse(json);
-        JsonElement issues = parsed.getAsJsonObject().get("issues");
-
+        try {
+            String url = String.format("http://demo.bugify.com/api/issues/%d.json", issueId);
+            String json = getExecutor().execute(Request.Get(url)).returnContent().asString();
+            JsonElement parsed = new JsonParser().parse(json);
+            int status = parsed.getAsJsonObject().getAsJsonArray("issues").get(0).getAsJsonObject().get("state").getAsInt();
+            if(status!=0)
+            {
+                return true;
+            }
+        }
+        catch (HttpResponseException ex){
+            if(ex.getStatusCode()==404){
+                return false;
+            }
+            else  {
+                throw ex;
+            }
+        }
 
         return false;
     }

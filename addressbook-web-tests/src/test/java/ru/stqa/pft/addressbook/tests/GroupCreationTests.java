@@ -59,7 +59,8 @@ public class GroupCreationTests extends TestBase {
 
 
     @Test(dataProvider = "validGroupsFromJson")
-    public void testGroupCreation(GroupData group) {
+    public void testGroupCreation(GroupData group) throws SkipException, IOException {
+        skipIfNotFixed(15646546);
 
         app.goTo().groupPage();
         Groups before = app.db().groups();
