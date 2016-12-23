@@ -1,5 +1,9 @@
 package ru.stqa.pft.addressbook.tests;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import javassist.bytecode.analysis.Executor;
+import org.apache.http.client.fluent.Request;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.support.ui.SystemClock;
 import org.slf4j.Logger;
@@ -12,6 +16,7 @@ import ru.stqa.pft.addressbook.appmanager.ApplicationManager;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -60,4 +65,29 @@ public class TestBase {
 
     }
 
+    boolean isIssueOpen(int issueId) throws IOException {
+
+        String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json")).returnContent().asString();
+        JsonElement parsed = new JsonParser().parse(json);
+        JsonElement issues = parsed.getAsJsonObject().get("issues");
+
+
+        return false;
+    }
+
+    private org.apache.http.client.fluent.Executor getExecutor() {
+        return org.apache.http.client.fluent.Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==","");
+    }
+
+    public void skipIfNotFixed(int issueId) throws SkipException, IOException {
+        if (isIssueOpen(issueId)) {
+            throw new SkipException("Ignored because of issue " + issueId);
+        }
+    }
+
+    class SkipException extends Throwable {
+        public SkipException(String s) {
+            super(s);
+        }
+    }
 }
