@@ -45,7 +45,9 @@ public class ApplicationManager {
 
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties",target))));
-
+        System.setProperty("webdriver.gecko.driver", properties.getProperty("web.pathToFirefoxDriver"));
+        System.setProperty("webdriver.chrome.driver", properties.getProperty("web.pathToChromeDriver"));
+        System.setProperty("webdriver.ie.driver", properties.getProperty("web.pathToIeDriver"));
         if("".equals(properties.getProperty("selenium.server"))) {
             if (browser.equals(BrowserType.FIREFOX)) {
                 System.setProperty("webdriver.gecko.driver", properties.getProperty("web.pathToFirefoxDriver"));
